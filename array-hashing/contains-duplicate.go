@@ -1,4 +1,4 @@
-package containsDuplicate
+package arrayHashing
 
 func containsDuplicate(nums []int) bool {
 	if len(nums) <= 1 {
