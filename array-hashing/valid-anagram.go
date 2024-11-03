@@ -1,22 +1,40 @@
 package arrayHashing
 
+import (
+	"sort"
+)
+
+func sortString(s string) string {
+	b := []byte(s)
+	sort.Slice(b, func(i, j int) bool {
+		return b[i] < b[j]
+	})
+	return string(b)
+}
+
+// Time Complexity O(n)
+// Space Complexity O(1)
 func isAnagram(s string, t string) bool {
-  if len(s) != len(t) {
-     return false
-  }
+	if len(s) != len(t) {
+		return false
+	}
 
-  var freq [26]int
+	var freq [26]int
 
-  for idx := 0; idx < len(s); idx++ {
-    freq[s[idx] - 'a']++
-    freq[t[idx] - 'a']--
-  }
+	for i := 0; i < len(s); i++ {
+		freq[s[i]-'a']++
+		freq[t[i]-'a']--
+	}
 
-  for idx := 0; idx < len(freq); idx++ {
-    if freq[idx] != 0 {
-      return false
-    }
-  }
+	for i := 0; i < len(freq); i++ {
+		if freq[i] != 0 {
+			return false
+		}
+	}
 
-  return true
+	return true
+
+	// Time Complexity O(n log n)
+	// Space Complexity O(1)
+	// return sortString(s) == sortString(t)
 }
