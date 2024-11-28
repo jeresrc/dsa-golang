@@ -1,4 +1,4 @@
-package arrayHashing
+package stack
 
 func validParentheses(s string) bool {
 	pairs := map[byte]byte{

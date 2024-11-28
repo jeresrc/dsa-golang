@@ -1,33 +1,44 @@
 package arrayHashing
 
-// Time Complexity O(n2)
-func isValidSudoku(board [][]byte) bool {
-  hashMap := make(map[string]bool)
+import "fmt"
 
-  for i:=0; i<9; i ++ {
-    for j:=0; j<9; j++ {
-      row := i
-      column := j
+// Time Complexity O(n^2)
+// Space Complexity O(n)
+func IsValidSudoku(board [][]byte) bool {
+	hashMap := make(map[string]bool)
 
-      current_val := string(board[i][j])
+	for i := 0; i < 9; i++ {
+		for j := 0; j < 9; j++ {
+			row := i
+			column := j
 
-      if current_val == "." { 
-          continue
-      }
+			current_val := string(board[i][j])
 
-      _,ok1 := hashMap[current_val + "found in row" + string(row)]
-      _,ok2 := hashMap[current_val + "found in column"+  string(column)]
-      _,ok3 := hashMap[current_val + "found in grid" + string(i/3) + "-" + string(j/3)]
+			if current_val == "." {
+				continue
+			}
 
-      if ok1 || ok2 || ok3 {
-        return false
-      } else {
-        hashMap[current_val + "found in row" + string(row)] = true
-        hashMap[current_val + "found in column"+  string(column)] = true
-        hashMap[current_val + "found in grid" + string(i/3) + "-" + string(j/3)] = true
-      }
-    }
-  }
+			foundInRow := fmt.Sprintf("%v found in row %v", current_val, row)
+			foundInColumn := fmt.Sprintf("%v found in column %v", current_val, column)
+			foundInGrid := fmt.Sprintf("%v found in grid %v-%v", current_val, i/3, j/3)
 
-  return true
+			_, okRow := hashMap[foundInRow]
+			_, okCol := hashMap[foundInColumn]
+			_, okGrid := hashMap[foundInGrid]
+
+			if okRow || okCol || okGrid {
+				return false
+			} else {
+				println(foundInRow)
+				println(foundInColumn)
+				println(foundInGrid)
+
+				hashMap[foundInRow] = true
+				hashMap[foundInColumn] = true
+				hashMap[foundInGrid] = true
+			}
+		}
+	}
+
+	return true
 }
