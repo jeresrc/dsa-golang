@@ -29,9 +29,9 @@ func IsValidSudoku(board [][]byte) bool {
 			if okRow || okCol || okGrid {
 				return false
 			} else {
-				println(foundInRow)
-				println(foundInColumn)
-				println(foundInGrid)
+				println("[row]", foundInRow)
+				println("[column]", foundInColumn)
+				println("[grid]", foundInGrid)
 
 				hashMap[foundInRow] = true
 				hashMap[foundInColumn] = true
