@@ -24,4 +24,7 @@ func main() {
 
 	result := stack.CarFleet(target, position, speed)
 	println("[car fleet] result:", result)
+
+	result = arrayHashing.LongestConsecutive([]int{0, 3, 2, 5, 4, 6, 1, 1})
+	println("[longest consecutive sequence] result:", result)
 }
