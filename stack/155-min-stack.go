@@ -1,20 +1,52 @@
 package stack
 
-type MinStack struct{}
+import "math"
+
+type MinStack struct {
+	min   int
+	stack []int
+}
 
 func Constructor() MinStack {
+	return MinStack{
+		min:   math.MaxInt64,
+		stack: []int{},
+	}
 }
 
-func (this *MinStack) Push(val int) {
+func (st *MinStack) Push(val int) {
+	if len(st.stack) == 0 {
+		st.stack = append(st.stack, 0)
+		st.min = val
+	} else {
+		st.stack = append(st.stack, val-st.min)
+		if val < st.min {
+			st.min = val
+		}
+	}
 }
 
-func (this *MinStack) Pop() {
+func (st *MinStack) Pop() {
+	if len(st.stack) == 0 {
+		return
+	}
+	pop := st.stack[len(st.stack)-1]
+	st.stack = st.stack[:len(st.stack)-1]
+	if pop < 0 {
+		st.min = st.min - pop
+	}
 }
 
-func (this *MinStack) Top() int {
+func (st *MinStack) Top() int {
+	top := st.stack[len(st.stack)-1]
+	if top > 0 {
+		return top + st.min
+	}
+	return st.min
 }
 
-func (this *MinStack) GetMin() int {
+func (st *MinStack) GetMin() int {
+	return st.min
 }
 
 /**
